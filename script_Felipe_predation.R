@@ -39,13 +39,29 @@ getwd()
 ### Period: Day (D) vs Night (N)
 ### Temperature: 20 C vs 23C 
 
-RMR<-read.table(file = "RMR.txt", header = TRUE,dec = ".")
+RMR    <-  read.table(file = "RMR.txt", header = TRUE,dec = ".")
+scope  <-  read.table(file = "AEROBIC.txt", header = TRUE,dec = ".")
+
+
+## -----    explo responses  --------------
+source('utils.R')
+
+respo  <- cbind(RMR=RMR$RMR, scope[,-c(1:4)])
+
+cor(respo)
+cor.prob(respo)
+flattenSquareMatrix(cor.prob(respo))
+chart.Correlation(respo)
+
+## --------------------------------------------
+
+
 
 ### Explanatory variables as factors
-RMR$ftreat<-factor(RMR$treat)
-RMR$ftemp<-factor(RMR$temp)
-RMR$fID<-factor(RMR$ID)
-RMR$fperiod<-factor(RMR$period)
+RMR$ftreat  <- factor(RMR$treat)
+RMR$ftemp   <- factor(RMR$temp)
+RMR$fID     <- factor(RMR$ID)
+RMR$fperiod <- factor(RMR$period)
 
 
 ### Models
@@ -72,7 +88,7 @@ anova(RMR.md2)
 ### Temperature (temp): 20 C vs 23 C
 ##  ID: lobster individual (eg L1)
 
-scope<-read.table(file = "AEROBIC.txt", header = TRUE,dec = ".")
+
 
 ### Explanatory variables as factors
 scope$ftreat<-factor(scope$treat)

@@ -67,8 +67,14 @@ RMR$fperiod <- factor(RMR$period)
 ### Models
 ### Model #1 
 ### Note: Interaction is specified, and temperature is only evaluated as level
+RMR.md0.1 <- gam(RMR ~ fperiod + ftemp, data=RMR)
+par(mfrow=c(2,1))
+plot(RMR.md0.1, all.terms=T, residuals=TRUE)
+
 RMR.md0<-gls(RMR~ ftreat*fperiod+ftemp,data=RMR)
 RMR.md1<-lme(RMR~ ftreat*fperiod+ftemp,random=~1|fID,data=RMR) ## ID contributes with lots of heterogeneity, so I added as random
+
+
 anova(RMR.md0,RMR.md1) ## Comparing the inclusion of ID as randome effect, improves the model so I will keep going with mixed models
 
 ## Model #2: Juan Carlos's suggestion

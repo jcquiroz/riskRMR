@@ -2,6 +2,7 @@
 
 library(PerformanceAnalytics)
 
+## check unbalanced matrix!!!!!!!!!!!!
 ## Correlation matrix with p-values. See http://goo.gl/nahmV for documentation of this function
 cor.prob <- function (X, dfr = nrow(X) - 2) {
   R <- cor(X, use="pairwise.complete.obs")
